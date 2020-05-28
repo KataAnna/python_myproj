@@ -1,0 +1,29 @@
+{% extends "authors/base.html" %}
+
+{% block title %}
+    Index of Authors
+{% endblock %}
+
+
+{% load random_joke %}
+{% load email_domain %}
+{% block body %}
+     <h1>Authors:</h1>
+     <hr>
+        {% joke 1 %} 
+        {% joke 0 %}
+        {% joke 2 %}
+        {% joke 3 %}
+        {% joke 'abc' %} 
+        {% joke %}    
+     <hr> 
+     <div>
+        <ul class="list-group">
+            {% for author in authors %}
+                <li class="list-group-item">{{  author.id  }}. {{  author  }} | {{  author.email|domain}}</li>
+            {% endfor %}
+          </ul>
+     </div>
+{% endblock %}
+        
+    

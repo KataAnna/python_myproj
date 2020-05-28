@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Articles!</title>
+    </head>
+    <body>
+        <h1>All available articles:</h1>
+        <ul>
+            {% for article in articles %}
+            <li><h3>{{  article  }}</h3></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

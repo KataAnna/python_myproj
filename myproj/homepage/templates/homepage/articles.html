@@ -1,0 +1,99 @@
+{% extends 'homepage/base.html' %}
+
+{% block title %}
+Articles
+{% endblock %}
+
+{% block body %}
+<h1>Choosw an article:</h1>
+
+{% comment %}
+<ul class="list-group">
+    {% for num in articles %}
+    {% cycle val1 val2 as val silent %}
+    <li class="list-group-item {% cycle 'list-group-item-primary' 'list-group-item-success' 'list-group-item-warning' %}">Article #{{ num }} {{ val|safe }}</li>
+    {% endfor %}  
+
+    {% cycle 'dark' 'danger' as theme silent %}
+    <li class="list-group-item list-group-item-{{ theme }}">A simple secondary list group item</li>
+    <li class="list-group-item list-group-item-{{ theme }}">A simple secondary list group item</li>
+    {% cycle theme %}
+    <li class="list-group-item list-group-item-{{ theme }}">A simple secondary list group item</li>
+    <li class="list-group-item list-group-item-{{ theme }}">A simple secondary list group item</li>
+  </ul>
+  {% endcomment %}
+
+  <div>
+
+    <h4>
+      {% autoescape off %}
+        {% firstof val0 val1 val2 'Nothing'  %}
+      {% endautoescape %}
+    </h4>
+
+
+    {% for num in articles %}
+    {% if num == 1 %}
+      <h1>Article {{ num }}</h1>
+      {% elif num == 2 %}
+      <h2>Article {{ num }}</h2>
+      {% elif num == 3 %}
+      <h3>Article {{ num }}</h3>
+      {% else %}
+      <h4>Article {{ num }}</h4>
+    {% endif %}
+    {% empty %}
+    <div>Sorry, no articles</div>
+    {% endfor %}
+
+    <div>
+    {% if obj.foo > 40 %}
+      <div>Foo from obj grater than 40</div>
+    {% endif %}
+    </div>
+    <br>
+    {{ obj.data.spam }}
+    {{  obj.list.2  }}
+    
+    {% if obj.list|length > 5 %}
+      <h3>Length of list is grater than 5</h3>
+    {% else %}
+      <h3>Length of list is lower than 5 or equal</h3>
+    {% endif %}
+
+    <div>
+      <h5>{{  obj.list.2|add:"5"  }}</h5>
+      <h5>{{  val0|add:"5"  }}</h5>
+      <h5>{{  onj.list|add:obj.list  }}</h5>
+    </div>
+
+    <h3>{{  val1|center:15  }}</h3>
+    <pre>{{  val0|capfirst  }}</pre>
+    <h4>{{  a_title|title  }}</h4>
+    <pre>{{  string|linenumbers}}</pre>
+    <br>
+    <h5>{{  string|linebreaks  }}</h5>
+
+    {#<h4>{% now "G j F Y i" %}</h4>#} 
+
+    <h4>{{  current|date:"DATE_FORMAT"  }}</h4>
+
+    <div>
+        {% for a_date in dates %}
+          {% ifchanged a_date.month %}
+          <br>
+            <h3>{{  a_date|date:"F"  }}</h3>
+          {% endifchanged %}
+          {% ifchanged a_date.date %}
+            <hr>
+              <h4>{{  a_date|date:"SHORT_DATE_FORMAT"  }}</h4>
+            {% else %}
+            ;
+            {% endifchanged %}
+          <div>{{  a_date|date:"TIME_FORMAT"  }}</div>
+        {% endfor %}
+    </div>
+
+  </div>
+
+{% endblock %}
